@@ -1,0 +1,121 @@
+<!--index.wxml-->
+<view class="main">
+  <view class='section_search fondation'>
+    <!-- <button open-type='getUserInfo' bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
+    <view class='content'>
+      <view class='hot-search'>
+        <view class='hot-search-label'>
+          <text>热门:</text>
+        </view>
+        <button class='hot-search-item' size='mini'>太湖{{narrow_icon}}合肥</button>
+        <button class='hot-search-item' size='mini'>太湖{{narrow_icon}}安庆</button>
+      </view>
+      <view class='section'>
+        <view class="flex-wrp mgt20" style="flex-direction:row;">
+          <view class="flex-item pd15 fontsize32">
+            <view class="flex-wrp pdl20">
+              <input class='bd-bottom pdb10' placeholder='出发地' name="departure" maxlength='30' value="{{data.search.departure}}"/>
+              <view class="">
+                <image bindtap='handleLocation' data-type='departure' src='../../resources/img/location-icon.png' class="icon-location-outline"></image>
+              </view>
+            </view>
+          </view>
+          <view class='icon-outter'>
+            <image class='icon-narrow' src='../../resources/img/narrow-both.png'/>
+          </view>
+          
+          <view class="flex-item pd15 fontsize32">
+            <view class='flex-wrp pdl20'>
+              <input class='bd-bottom pdb10' placeholder='目的地' name="destination" maxlength='30' value="{{data.search.destination}}"/>
+              <view>
+                <image bindtap='handleLocation' data-type='destination' src='../../resources/img/location-icon.png' class="icon-location-outline"></image>
+              </view>
+            </view>
+          </view>
+        </view>      
+      </view>
+
+      <view class='flex-wrp pdl20'>
+        <view class='pd15 width600'>
+          <picker
+            class='bd-bottom pdb10'
+            mode="date"
+            value="{{data.search.leave_date}}"
+            start="2015-09-01"
+            end="2017-09-01"
+            bindchange="bindDateChange"
+          >
+            <view class="picker">
+              <text class='date-label'>出发时间</text> {{data.search.leave_date}}
+            </view>
+          </picker>
+        </view>
+        
+      </view>
+
+      <view class='mgt20'>
+        <button
+        bindtap="setLoading"
+        class='search-button'>
+        查询
+        </button>
+      </view>
+      
+    </view>
+    
+  </view>
+  <!-- search end -->
+  <!-- tab -->
+  <view class="flex-wrp nav-box" style="flex-direction:row;">
+    <view class="flex-item nav-normal {{tabType==3?'active':''}}" id="3" bindtap='switchTab'>
+      <text class='nav-text'>全部</text>
+    </view>
+    <view class="flex-item nav-normal {{tabType==2?'active':''}}" id="2" bindtap='switchTab'>
+      <text class='nav-text'>找人</text>
+    </view>
+    <view class="flex-item nav-normal {{tabType==1?'active':''}}" id="1" bindtap='switchTab'>
+      <text>找车</text>
+    </view>
+  </view>
+  <!-- <view class='separate-line'><text>————— 全部线路 —————</text></view> -->
+  <!-- share car list -->
+  <view class='section_result_list fondation'>
+    <scroll-view
+     scroll-y = 'true'
+     enable-back-to-top='true'
+     bindscrolltolower="getMoreTrip">
+      <view class='pc-item content' wx:for = "{{list}}" wx:key = "{{item.id}}">
+        <view class='top-userinfo'>
+          <view class='flex-wrp'>
+              <image src='../../resources/img/avatar.jpg' class="flex-item userinfo-avatar userinfo-avatar-cos"></image>
+              <text class='flex-item w50'>{{item.contact_name}}</text>
+            <view class='w30 align-right flex-item'>
+              <text wx:if="{{item.pc_type == 1 }}" class='label-type-medium label-passenger cos-label-type'>人找车</text>
+              <text wx:if="{{item.pc_type == 2 }}" class='label-type-medium label-driver cos-label-type'>车找人</text>
+            </view>
+          </view>
+        </view>
+        <view class=''>
+          <text>{{item.departure}}->{{item.destination}}</text>
+        </view>
+        <view class=''>
+          <text>出发时间:{{item.leave_date}} {{item.leave_time}}</text>
+          <text wx:if="{{item.pc_type == 2 }}">还剩{{item.seats_count}}个座位</text>
+          <text wx:if="{{item.pc_type == 1 }}">需要{{item.people_count}}个座位</text>
+        </view>
+        <view class=''>
+          <text>备注:{{item.memo}}</text>
+        </view>
+        <view class=''>
+          <button size='mini' id="{{item.contact_phone}}" bindtap='makeCall'>电话咨询</button>
+          <button size='mini' id="{{item.contact_wechat_account}}" bindtap='showWechatAccount'>微信咨询</button>
+        </view>
+      </view>
+      <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
+      <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>
+    </scroll-view>
+    
+    
+  </view>
+  <!-- list end -->
+</view>

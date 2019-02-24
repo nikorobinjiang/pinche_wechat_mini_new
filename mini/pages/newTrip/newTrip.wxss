@@ -1,0 +1,4 @@
+/* pages/newTrip/newTrip.wxss */
+.driver {color: #4169E1}
+.passenger {color:	#EEAD0E;}
+.pub-title {text-align: center;padding: 10rpx;font-size: 40rpx;line-height:3;}

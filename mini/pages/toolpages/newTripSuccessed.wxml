@@ -1,0 +1,11 @@
+<!--pages/toolpages/newTripSuccessed.wxml-->
+<view>
+  <view class='center'>
+    <icon type="success" size="100" color="#09BB07"/>
+    <view><text class='notice-text'>行程发布成功</text></view>
+  </view>
+  <view class='pd20'>
+    <button type='primary' class='mg20' bindtap="toMyTrip">我的行程</button>
+    <button type='default' class='mg20' bindtap="toHome">返回首页</button>
+  </view>
+</view>

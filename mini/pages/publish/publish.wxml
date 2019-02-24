@@ -1,0 +1,9 @@
+<!--pages/publish/publish.wxml-->
+<view class='mgt150'>
+  <view class="flex-wrp nav-box" style="flex-direction:row;">
+    <button class='flex-item pub-btn btn-driver' bindtap="newTripDriver">我是司机</button>
+    <button class='flex-item pub-btn btn-passenger' bindtap="newTripPassenger">我是乘客</button>
+  </view>
+</view>
+
+

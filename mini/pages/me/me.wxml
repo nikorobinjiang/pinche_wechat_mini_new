@@ -1,0 +1,32 @@
+<!--pages/me/me.wxml-->
+<view class='fondation'>
+  
+  <view class="flex-wrp userinfo-content bgw" style="flex-direction:row;">
+    <view class="flex-item">
+      <image src='../../resources/img/avatar.jpg' class="userinfo-avatar"></image>
+    </view>
+    <view class="flex-item mg20">
+      <text class='userinfo-name'>用户名</text>
+    </view>
+  </view>
+
+  <view class='mgt20'>
+    <view class='menu-item pd10 bgw mgb20'>
+      <text class='main-text'>我的行程</text>
+      <!-- <text class='narraw-icon'>></text> -->
+      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+
+    </view>
+    <view class='menu-item pd10 bgw btline-3'>
+      <text class='main-text'>分享推广</text>
+      <text class='narraw-icon'>></text>
+
+    </view>
+    <view class='menu-item pd10 bgw btline-3'>
+      <text class='main-text'>投诉建议</text>
+      <text class='narraw-icon'>></text>
+
+    </view>
+  </view>
+
+</view>

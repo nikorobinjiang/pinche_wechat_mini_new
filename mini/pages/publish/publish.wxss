@@ -1,0 +1,16 @@
+/* pages/publish/publish.wxss */
+.pub-btn::after{border: none;}
+.pub-btn {
+  width: 40%;
+  color: #fff;
+}
+.btn-driver {
+  /* #663399 #7D26CD #8E388E #4169E1*/
+  background-color:	 	#4169E1;
+  border: 2rpx solid	 	#4169E1;
+}
+.btn-passenger {
+  background-color:	#EEAD0E;
+  border: 2rpx solid #EEAD0E;
+  
+}

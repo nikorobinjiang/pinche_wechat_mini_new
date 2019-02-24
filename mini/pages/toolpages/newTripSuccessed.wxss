@@ -1,0 +1,3 @@
+/* pages/toolpages/newTripSuccessed.wxss */
+.center {text-align: center}
+.notice-text {margin: 10rpx}
