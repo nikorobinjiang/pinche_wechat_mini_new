@@ -1,6 +1,8 @@
 # coding:utf-8
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
+
 from django.conf import settings
 import urllib.request
 from app_main.models import User
@@ -52,7 +54,7 @@ def miniLogin(request):
     obj.city = res_decrypt['city']
     obj.country = res_decrypt['country']
     obj.save()
-    return HttpResponse('注册or登录成功')
+    return JsonResponse({'info':'succ','user_id':obj.id})
 
 
     

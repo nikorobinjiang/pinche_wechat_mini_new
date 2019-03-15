@@ -7,14 +7,17 @@
     "pages/newTrip/newTrip",
     "pages/toolpages/notice",
     "pages/toolpages/newTripSuccessed",
-    "pages/me/myTrip"
+    "pages/me/myTrip",
+    "pages/components/tripCard",
+    "pages/newTrip/tripInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "拼车吧",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#f9f9f9"
+    "backgroundColor": "#f9f9f9",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#000",

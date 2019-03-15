@@ -18,18 +18,21 @@
 .userinfo-nickname {
   color: #aaa;
 }
-
 .usermotto {
   margin-top: 200px;
 }
 
 .active {
-  border-bottom: 7rpx solid #09BB07;
-  color: #09BB07;
+  border-bottom: 7rpx solid #1aad19;
+  color: #1aad19;
 }
+
 .nav-normal {
-  margin: 30rpx 30rpx 0 30rpx;
-  font-size: 40rpx;
+  font-size:36rpx;
+  width:150rpx;
+  padding:22rpx 30rpx 20rpx 30rpx;
+  text-align:center;
+
 }
 .nav-box {
   border-bottom: 2rpx solid #DCDFE6;
@@ -49,6 +52,8 @@
   color: #fff;
   width: 90%;
 }
+.mgcenter {margin: 0 auto}
+.search-button::after{border: none;}
 .hot-search {
   padding: 14rpx 0 12rpx 30rpx;
 }
@@ -86,3 +91,5 @@
 .icon-outter {padding-top: 15rpx}
 .icon-narrow {width: 45rpx;height: 45rpx;margin: 0 15rpx}
 .date-label {font-size: 32rpx;color: #777}
+.height1000{height: 1000rpx;}
+.weui-loadmore .weui-loadmore__tips_in-line {background-color: #f6f6f6}

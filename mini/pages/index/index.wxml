@@ -1,67 +1,71 @@
 <!--index.wxml-->
 <view class="main">
   <view class='section_search fondation'>
-    <!-- <button open-type='getUserInfo' bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
-    <view class='content'>
-      <view class='hot-search'>
-        <view class='hot-search-label'>
-          <text>热门:</text>
+    <form>
+      <!-- <button open-type='getUserInfo' bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
+      <view class='content'>
+        <view class='hot-search'>
+          <view class='hot-search-label'>
+            <text>常用:</text>
+          </view>
+          <button wx:for = "{{hotTripList}}" wx:for-item="hItem" wx:key="{{hItem.id}}" class='hot-search-item' size='mini' data-dep='{{hItem.departure}}' data-des='{{hItem.destination}}' bindtap='chooseHot'>{{hItem.departure}}{{narrow_icon}}{{hItem.destination}}</button>
         </view>
-        <button class='hot-search-item' size='mini'>太湖{{narrow_icon}}合肥</button>
-        <button class='hot-search-item' size='mini'>太湖{{narrow_icon}}安庆</button>
-      </view>
-      <view class='section'>
-        <view class="flex-wrp mgt20" style="flex-direction:row;">
-          <view class="flex-item pd15 fontsize32">
-            <view class="flex-wrp pdl20">
-              <input class='bd-bottom pdb10' placeholder='出发地' name="departure" maxlength='30' value="{{data.search.departure}}"/>
-              <view class="">
-                <image bindtap='handleLocation' data-type='departure' src='../../resources/img/location-icon.png' class="icon-location-outline"></image>
+        <view class='section'>
+          <view class="flex-wrp mgt20" style="flex-direction:row;">
+            <view class="flex-item pd15 fontsize32">
+              <view class="flex-wrp pdl20">
+                <input class='bd-bottom pdb10' placeholder='出发地' bindinput='setInputData' data-type='departure' name="departure" maxlength='30' value="{{search.departure}}"/>
+                <view class="">
+                  <image bindtap='handleLocation' data-type='departure' src='../../resources/img/location-icon.png' class="icon-location-outline"></image>
+                </view>
               </view>
             </view>
-          </view>
-          <view class='icon-outter'>
-            <image class='icon-narrow' src='../../resources/img/narrow-both.png'/>
+            <view class='icon-outter'>
+              <image bindtap='switchLocation' class='icon-narrow' src='../../resources/img/narrow-both.png'/>
+            </view>
+            <view class="flex-item pd15 fontsize32">
+              <view class='flex-wrp pdl20'>
+                <input class='bd-bottom pdb10' placeholder='目的地' bindinput='setInputData' data-type="destination" name="destination" maxlength='30' value="{{search.destination}}"/>
+                <view>
+                  <image bindtap='handleLocation' data-type='destination' src='../../resources/img/location-icon.png' class="icon-location-outline"></image>
+                </view>
+              </view>
+            </view>
+          </view>      
+        </view>
+
+        <view class='flex-wrp pdl20'>
+          <view class='pd15 width600'>
+            <picker
+              class='bd-bottom pdb10'
+              mode="date"
+              value="{{search.leave_date}}"
+              start="2015-09-01"
+              end="2030-09-01"
+              bindchange="bindDateChange"
+            >
+              <view class="picker">
+                <text class='date-label'>出发时间</text> {{search.leave_date}}
+              </view>
+            </picker>
           </view>
           
-          <view class="flex-item pd15 fontsize32">
-            <view class='flex-wrp pdl20'>
-              <input class='bd-bottom pdb10' placeholder='目的地' name="destination" maxlength='30' value="{{data.search.destination}}"/>
-              <view>
-                <image bindtap='handleLocation' data-type='destination' src='../../resources/img/location-icon.png' class="icon-location-outline"></image>
-              </view>
-            </view>
-          </view>
-        </view>      
-      </view>
+        </view>
 
-      <view class='flex-wrp pdl20'>
-        <view class='pd15 width600'>
-          <picker
-            class='bd-bottom pdb10'
-            mode="date"
-            value="{{data.search.leave_date}}"
-            start="2015-09-01"
-            end="2017-09-01"
-            bindchange="bindDateChange"
+        <view class='mgt20'>
+          <button
+          bindtap="searchSubmit"
+          loading='{{ searchbtn.isloading }}'
+          class="{{ searchbtn.isloading ? 'loadingbtn' : '' }} {{ searchbtn.disabled ? 'disabledbtn' : '' }} search-button"
           >
-            <view class="picker">
-              <text class='date-label'>出发时间</text> {{data.search.leave_date}}
-            </view>
-          </picker>
+          查询
+          </button>
+          <button form-type='reset' bindtap='resetForm' size='mini' class='text-btn text-color-2 w100'>清空搜索</button>
         </view>
         
       </view>
-
-      <view class='mgt20'>
-        <button
-        bindtap="setLoading"
-        class='search-button'>
-        查询
-        </button>
-      </view>
       
-    </view>
+    </form>
     
   </view>
   <!-- search end -->
@@ -83,7 +87,8 @@
     <scroll-view
      scroll-y = 'true'
      enable-back-to-top='true'
-     bindscrolltolower="getMoreTrip">
+     bindscrolltolower="getMoreTrip"
+    >
       <view class='pc-item content' wx:for = "{{list}}" wx:key = "{{item.id}}">
         <view class='top-userinfo'>
           <view class='flex-wrp'>
@@ -111,10 +116,15 @@
           <button size='mini' id="{{item.contact_wechat_account}}" bindtap='showWechatAccount'>微信咨询</button>
         </view>
       </view>
-      <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
-      <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</view>
+
+      <view hidden="{{!searchLoading}}" class="weui-loadmore">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+      </view>
+      <view hidden="{{!searchLoadingComplete}}" class="weui-loadmore weui-loadmore_line">
+          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+      </view>
     </scroll-view>
-    
     
   </view>
   <!-- list end -->

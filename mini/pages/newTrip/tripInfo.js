@@ -1,48 +1,18 @@
-// pages/me/me.js
-const app = getApp();
-
+// pages/newTrip/tripInfo.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {
-      nickName: '',
-      avatarUrl: ''
-    }
-  },
-  // 跳转
-  toMyTrips: function() {
-    wx.navigateTo({
-      url: 'myTrip?id=1'
-    })
-  },
-  // 分享
-  handleShare: function() {
-    wx.showShareMenu({
-      withShareTicket: false,
-      success() { },
-      fail(e) {
-        console.log(e)
-      }
-    })
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    wx.getStorage({
-      key: 'userInfo',
-      success(value) {
-        that.setData({
-          'userInfo.nickName':value.data.nickName,
-          'userInfo.avatarUrl': value.data.avatarUrl
-        })
-      }
-    })
+
   },
 
   /**

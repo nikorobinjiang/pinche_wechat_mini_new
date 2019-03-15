@@ -7,26 +7,47 @@ var list = new Array();
 
 Page({
   data: {
-    userInfo: {},
+    userInfo: {
+      user_id:''
+    },
     hasUserInfo: false,
     search: {
       leave_date: '',
-      departure: '出发地',
-      destination: '目的地'
+      departure: '',
+      destination: ''
     },
+    searchbtn: {
+      disabled: false,
+      isloading: false,
+    },
+    hotTripList: [],
     narrow_icon: '<=>',
     tabType: 3,
     // 分页
     curPage: 1,
     totalPage: 1,
     countPerPage: 10,
-    searchLoading: true, 
+    searchLoading: true,
     searchLoadingComplete: false
+  },
+  // 输入搜索文字
+  setInputData: function(e) {
+    const type = e.currentTarget.dataset.type;
+    var that = this;
+    if (type == 'departure') {
+      that.setData({
+        'search.departure': e.detail.value
+      })
+    } else if (type == 'destination') {
+      that.setData({
+        'search.destination': e.detail.value
+      })
+    }
   },
   // 选择日期
   bindDateChange: function (e) {
     this.setData({
-      'data.search.leave_date': e.detail.value
+      'search.leave_date': e.detail.value
     })
   },
   // 获取位置
@@ -37,15 +58,44 @@ Page({
       success: function (res) {
         if(type == 'departure') {
           that.setData({
-            'data.search.departure': res.address
+            'search.departure': res.address
           })
         } else if (type == 'destination') {
           that.setData({
-            'data.search.destination': res.address
+            'search.destination': res.address
           })
         }
         
       }
+    })
+  },
+  // 选择热门路线
+  chooseHot: function(e) {
+    this.data.search.departure = e.currentTarget.dataset.dep;
+    this.data.search.destination = e.currentTarget.dataset.des;
+
+    this.setData({
+      'search.destination': e.currentTarget.dataset.des,
+      'search.departure': e.currentTarget.dataset.dep
+    });
+  },
+  // 调换出发地目的地
+  switchLocation: function() {
+    const temp_departure = this.data.search.departure;
+    const temp_destination = this.data.search.destination;
+    this.data.search.departure = temp_destination;
+    this.data.search.destination = temp_departure;
+    this.setData({
+      'search.destination': temp_departure,
+      'search.departure': temp_destination
+    })
+  },
+  // 清空搜索条件
+  resetForm: function() {
+    this.setData({
+      'search.departure':'',
+      'search.destination': '',
+      'search.leave_date': ''
     })
   },
   //事件处理函数
@@ -99,7 +149,17 @@ Page({
       }
     })
   },
-  
+  // 查询
+  searchSubmit: function(e) {
+    this.setData({
+      // tabType: tabType,
+      'searchbtn.isloading': true,
+      curPage: 1,
+      list: []
+    });
+    list = [];
+    this.fetchList()
+  },
   // load more
   getMoreTrip: function() {
     
@@ -113,10 +173,13 @@ Page({
   },
   // // 获取行程列表
   fetchList: function() {
+    
     var that = this;
     const data = {
       page: this.data.curPage,
-      tabType: this.data.tabType
+      tabType: this.data.tabType,
+      user_id: this.data.userInfo.user_id,
+      search: this.data.search
     }
     wx.request({
       url: app.globalData.requestUrl + '/getTripList',
@@ -146,17 +209,46 @@ Page({
           that.setData({
             list: list,
             searchLoading: false,
+            'searchbtn.isloading': false
+
           });
         }else{
           that.setData({
             searchLoading: false,
-            searchLoadingComplete: true
+            searchLoadingComplete: true,
+            'searchbtn.isloading': false
+
           });
         }
+        
       }
     })
   },
-  onLoad: function () {
+  getHotTrips: function(){
+    var that = this;
+    const data = {
+      user_id: this.data.userInfo.user_id
+    }
+    wx.request({
+      url: app.globalData.requestUrl + '/getHotTrips',
+      data: data,
+      success: function(res) {
+        if(res.data.length>0){
+          that.setData({
+            hotTripList: res.data
+          })
+        }
+      }
+    });
+  },
+  onReady: function () {
+    list = [];
+    this.setData({
+      list: list,
+    });
+    wx.showShareMenu({
+      withShareTicket: true
+    })
     // if (app.globalData.userInfo) {
     //   this.setData({
     //     userInfo: app.globalData.userInfo,
@@ -165,8 +257,30 @@ Page({
     // } else {
       
     // }
+    
+    // setdata userid
+    var that = this;
+    try {
+      const value = wx.getStorageSync('user_id')
+      // console.log(value)
+      // wx.getStorageInfo({
+      //   success: function(res) {
+      //     console.log(res.data.user_id);
+      //   },
+      // })
+      if (value) {
+        that.setData({
+          'userInfo.user_id': value
+        })
+      }
+    } catch (e) {
+      console.log(e)
+    }
+    
     // 获取行程列表
-    this.fetchList()
+    this.fetchList();
+    // 获取热门行程列表
+    this.getHotTrips();
   },
   // 切换页签
   switchTab: function(e) {
@@ -181,7 +295,7 @@ Page({
   },
   
   onGotUserInfo: function(e) {
-    // console.log(e)
+    console.log(e)
     // 登录
     wx.login({
       success: res => {

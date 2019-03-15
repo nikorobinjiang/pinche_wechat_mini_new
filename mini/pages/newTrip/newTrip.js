@@ -7,6 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    userInfo: {
+      user_id: ''
+    },
     typeText: '司机',
     pubType:'driver',
     rTypeText:'找人',
@@ -45,26 +48,40 @@ Page({
       isAgree: !!e.detail.value.length
     });
   },
+  // 提交表单
   formSubmit: function(e) {
     let data = e.detail.value;
     data.pc_type = this.data.pubType;
-    wx.request({
-      url: app.globalData.requestUrl + '/trip/create',
-      method: 'POST',
-      data: data,
-      header: {
-        'content-type': 'application/x-www-form-urlencoded' // 默认值
-      },
-      success: function(res) {
-        console.log(res)
-        if(res.data.info == 'success'){
-          // 发布成功页面
-          wx.redirectTo({
-            url: '/pages/toolpages/newTripSuccessed'
-          })
-        }
+    // 获取本地存储的用户ID
+    try {
+      const value = wx.getStorageSync('user_id')
+      if (value) {
+        // that.setData({
+        //   'userInfo.user_id': value
+        // })
+        data.user_id = value;
+        wx.request({
+          url: app.globalData.requestUrl + '/trip/create',
+          method: 'POST',
+          data: data,
+          header: {
+            'content-type': 'application/x-www-form-urlencoded' // 默认值
+          },
+          success: function (res) {
+            console.log(res)
+            if (res.data.info == 'success') {
+              // 发布成功页面
+              wx.redirectTo({
+                url: '/pages/toolpages/newTripSuccessed'
+              })
+            }
+          }
+        })
       }
-    })
+    } catch (e) {
+      console.log(e)
+    }
+    
   },
   /**
    * 生命周期函数--监听页面加载

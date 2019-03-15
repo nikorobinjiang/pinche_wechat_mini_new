@@ -5,7 +5,7 @@
         <view class="weui-toptips weui-toptips_warn" wx:if="{{showTopTips}}">{{errorMsg}}</view>
         <view class='pub-title {{pubType}}'>
           <text>{{typeText}}发布</text>
-          <text class='label-type label-{{pubType}}'>{{rTypeText}}</text>
+          <text class='label-type-medium label-{{pubType}}'>{{rTypeText}}</text>
         </view>
         <form bindsubmit="formSubmit">
           <view class="weui-cells__title">填写拼车信息</view>

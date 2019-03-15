@@ -38,3 +38,11 @@ class TripInfo(models.Model):
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
 
+class HotTripSearch(models.Model):
+    departure = models.CharField(max_length=30,default='',null=True)
+    destination = models.CharField(max_length=30,default='',null=True)
+    user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    show = models.CharField(max_length=2,default='',null=True)
+    
+

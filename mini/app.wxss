@@ -39,16 +39,20 @@ page {color: #353535;}
   color: #fff;
 }
 .label-driver {
-  background-color: #4169E1;
+  /* #4169E1 */
+  background-color: rebeccapurple;
 }
 .label-passenger {
   background-color: #EEAD0E;
 }
 .icon-location-outline {display: flex;width: 55rpx;height: 55rpx;}
-
+.text-btn::after, .text-btn-menu::after{border: none}
+.text-btn {background-color: #fff;text-decoration: underline;}
+.text-btn-menu {background-color: #fff;text-align: left;}
 .bgw {background-color: #fff;}
 .fr {float: right}
 .fl {float: left}
+.w100 {width: 100%}
 .w50 {width: 50%}
 .w40 {width: 40%}
 .w30 {width: 30%}
@@ -75,6 +79,8 @@ page {color: #353535;}
 .border-4 {border: 2rpx solid #F2F6FC}
 .bd-bottom {border-bottom: 2rpx solid #DCDFE6}
 .fontsize32 {font-size: 32rpx}
+.main .loadingbtn {background-color: #179B16;}
+.main .disabledbtn {background-color: #9ED99D;}
 /* 导入 */
 page {
   line-height: 1.6;

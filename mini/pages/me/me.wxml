@@ -3,30 +3,27 @@
   
   <view class="flex-wrp userinfo-content bgw" style="flex-direction:row;">
     <view class="flex-item">
-      <image src='../../resources/img/avatar.jpg' class="userinfo-avatar"></image>
+      <image src='{{ userInfo.avatarUrl }}' class="userinfo-avatar"></image>
     </view>
     <view class="flex-item mg20">
-      <text class='userinfo-name'>用户名</text>
+      <text class='userinfo-name'>{{ userInfo.nickName }}</text>
     </view>
   </view>
 
   <view class='mgt20'>
-    <view class='menu-item pd10 bgw mgb20'>
-      <text class='main-text'>我的行程</text>
+    <view class='menu-item bgw mgb20' bindtap='toMyTrips'>
+      <text class='main-text'>我发布的</text>
       <!-- <text class='narraw-icon'>></text> -->
-      <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-
+      <view class="weui-cell__ft weui-cell__ft_in-access top34minus"></view>
     </view>
-    <view class='menu-item pd10 bgw btline-3'>
+    <button class='menu-item bgw btline-3 text-btn-menu' open-type='share'>
       <text class='main-text'>分享推广</text>
-      <text class='narraw-icon'>></text>
-
-    </view>
-    <view class='menu-item pd10 bgw btline-3'>
+      <view class="weui-cell__ft weui-cell__ft_in-access top34minus"></view>
+    </button>
+    <button class='menu-item bgw btline-3 text-btn-menu' open-type='contact'>
       <text class='main-text'>投诉建议</text>
-      <text class='narraw-icon'>></text>
-
-    </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access top34minus"></view>
+    </button>
   </view>
 
 </view>

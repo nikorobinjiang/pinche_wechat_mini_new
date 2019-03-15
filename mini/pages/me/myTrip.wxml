@@ -1,2 +1,38 @@
-<!--pages/me/myTrip.wxml-->
-<text>pages/me/myTrip.wxml</text>
+<view class="main">
+  <view class='section_result_list fondation'>
+    <scroll-view
+     scroll-y = 'true'
+     enable-back-to-top='true'
+     bindscrolltolower="getMoreTrip">
+      <view class='pc-item content' wx:for = "{{list}}" wx:key = "{{item.id}}">
+        <view class='top-userinfo'>
+          <view class='flex-wrp'>
+            <view class='w30 align-right flex-item'>
+              <text wx:if="{{item.pc_type == 1 }}" class='label-type-medium label-passenger cos-label-type'>人找车</text>
+              <text wx:if="{{item.pc_type == 2 }}" class='label-type-medium label-driver cos-label-type'>车找人</text>
+            </view>
+          </view>
+        </view>
+        <view class=''>
+          <text>{{item.departure}}->{{item.destination}}</text>
+        </view>
+        <view class=''>
+          <text>出发时间:{{item.leave_date}} {{item.leave_time}}</text>
+          <text wx:if="{{item.pc_type == 2 }}">还剩{{item.seats_count}}个座位</text>
+          <text wx:if="{{item.pc_type == 1 }}">需要{{item.people_count}}个座位</text>
+        </view>
+        <view class=''>
+          <text>备注:{{item.memo}}</text>
+        </view>
+        <view class=''>
+          <button size='mini' id="{{item.id}}" bindtap='editItem'>修改</button>
+          <button size='mini' id="{{item.id}}" bindtap='deleteItem'>删除</button>
+        </view>
+      </view>
+      <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
+      <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全</view>
+    </scroll-view>
+    
+    
+  </view>
+</view>
