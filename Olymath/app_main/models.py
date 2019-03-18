@@ -33,10 +33,11 @@ class TripInfo(models.Model):
     status = models.CharField(max_length=20,default='',null=True)
     contact_phone = models.CharField(max_length=30,default='',null=True)
     contact_wechat_account = models.CharField(max_length=50,default='',null=True)
-    contact_gender = models.CharField(max_length=1,default=1,null=True)
+    contact_gender = models.CharField(max_length=2,default='',null=True)
     contact_name = models.CharField(max_length=30,default='',null=True)
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
+    deleted_at = models.DateTimeField(null=True,default=None)
 
 class HotTripSearch(models.Model):
     departure = models.CharField(max_length=30,default='',null=True)
@@ -44,5 +45,6 @@ class HotTripSearch(models.Model):
     user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     show = models.CharField(max_length=2,default='',null=True)
+    deleted_at = models.DateTimeField(null=True,default=None)
     
 

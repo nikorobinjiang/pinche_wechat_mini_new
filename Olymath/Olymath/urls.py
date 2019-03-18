@@ -32,6 +32,7 @@ urlpatterns = [
     path('trip/create',app_main_view.createOrUpdateTrip),
     path('getHotTrips',app_main_view.getHotTrips),
     path('myTripList',app_main_view.myTripList),
-    path('tripDetail',app_main_view.tripDetail)
+    path('trip/detail',app_main_view.tripDetail),
+    path('trip/delete',app_main_view.deleteTrip),
 
 ]
