@@ -18,10 +18,10 @@ import pytz
 
 # import time
 
-def login(request):
-    context = {}
-    context['login'] = 'login here'
-    return render(request,'login.html',context)
+# def login(request):
+#     context = {}
+#     context['login'] = 'login here'
+#     return render(request,'login.html',context)
 
 def getHotTrips(request):
     userId = request.GET.get('user_id',0)
