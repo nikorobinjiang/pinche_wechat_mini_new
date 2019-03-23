@@ -1,65 +1,104 @@
 // pages/newTrip/newTrip.js
-const app = getApp()
-
+const app = getApp();
+const date = new Date();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    // 顶部错误提示
+    showTopTips:false,
+    errorMsg: '',
     userInfo: {
       user_id: ''
     },
-    typeText: '司机',
-    pubType:'driver',
-    rTypeText:'找人',
-    sex: ['请选择性别', '男', '女'],
+    typeText: '',
+    pubType:'',
+    rTypeText:'',
+    genderItems: [
+      { name: '男', value: '1' },
+      { name: '女', value: '2' }
+    ],
     Surpluss: ['请选择', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     isAgree: false,
+    tripDetail:{
+    },
     formData: {
-      name: '朱秀娟',
-      departure: '出发地',
-      destination: '目的地',
-      seats_count: 0,
-      people_count: 0
-    }
+      // name: '',
+      // departure: '',
+      // destination: '',
+      // seats_count: 0,
+      // people_count: 0
+    },
+    start:date.getFullYear() + '-' + (date.getMonth()+1) + '-'+date.getDate(),
+    end: (date.getFullYear()+3) + '-' + (date.getMonth() + 1) + '-' + date.getDate()
   },
-  setSex: function (e) {
-    this.setData({ 'data.formData.contact_gender': e.detail.value })
+  showTopTips: function (msg) {
+    var that = this;
+    this.setData({
+      errorMsg: msg,
+      showTopTips: true
+    });
+    setTimeout(function () {
+      that.setData({
+        showTopTips: false
+      });
+    }, 3000);
+  },
+  genderChange: function (e) {
+    var genderItems = this.data.genderItems;
+    for (var i = 0, len = genderItems.length; i < len; ++i) {
+      genderItems[i].checked = genderItems[i].value == e.detail.value;
+    }
+    this.setData({
+      genderItems: genderItems,
+      'formData.contact_gender': e.detail.value
+    });
   },
   bindDateChange: function (e) {
     this.setData({
-      'data.formData.leave_date': e.detail.value
+      'formData.leave_date': e.detail.value
     })
   },
   bindTimeChange: function (e) {
     this.setData({
-      'data.formData.leave_time': e.detail.value
+      'formData.leave_time': e.detail.value
     })
   },
   setseats_count: function (e) {
-    this.setData({ 'data.formData.seats_count': e.detail.value })
+    this.setData({ 'formData.seats_count': e.detail.value })
   },
   setpeople_count: function (e) {
-    this.setData({ 'data.formData.people_count': e.detail.value })
+    this.setData({ 'formData.people_count': e.detail.value })
   },
   bindAgreeChange: function (e) {
     this.setData({
       isAgree: !!e.detail.value.length
     });
   },
+  navback: function(){
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   // 提交表单
   formSubmit: function(e) {
+    
     let data = e.detail.value;
     data.pc_type = this.data.pubType;
     // 获取本地存储的用户ID
     try {
-      const value = wx.getStorageSync('user_id')
+      // const value = wx.getStorageSync('user_id')
+      const value = app.globalData.user_id;
+
       if (value) {
-        // that.setData({
-        //   'userInfo.user_id': value
-        // })
         data.user_id = value;
+        // 检查必填项
+        if(!data.departure || !data.destination){
+          this.showTopTips('出发地和目的地不能为空');
+          return;
+        }
         wx.request({
           url: app.globalData.requestUrl + '/trip/create',
           method: 'POST',
@@ -68,7 +107,6 @@ Page({
             'content-type': 'application/x-www-form-urlencoded' // 默认值
           },
           success: function (res) {
-            console.log(res)
             if (res.data.info == 'success') {
               // 发布成功页面
               wx.redirectTo({
@@ -87,22 +125,51 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options)
     let typeText = ''
     let rTypeText = ''
     if(options.type == 'driver') {
       typeText = '司机'
       rTypeText = '找人'
     } else if (options.type == 'passenger') {
-      typeText = '乘客'
+      typeText = '乘客' 
       rTypeText = '找车'
 
     }
     this.setData({
       typeText: typeText,
       pubType: options.type,
-      rTypeText: rTypeText
-    })
+      rTypeText: rTypeText,
+    });
+    // 有id 修改
+    var that = this;
+    if(options.tripId){
+      // 获取详细信息
+      wx.request({
+        url: app.globalData.requestUrl + '/trip/detail?trip_id='+options.tripId,
+        success: function(d) {
+          if(d.statusCode==200){
+            // 日期 时间 null处理
+            if(d.data.leave_date == null){
+              d.data.leave_date=''
+            }
+            if(d.data.leave_time==null){
+              d.data.leave_time = ''
+            }
+            that.setData({
+              formData: d.data
+            })
+            // 性别check
+            var genderItems = that.data.genderItems;
+            for (var i = 0, len = genderItems.length; i < len; ++i) {
+              genderItems[i].checked = genderItems[i].value == d.data.contact_gender;
+              that.setData({
+                genderItems: genderItems
+              });
+            }
+          }
+        }
+      })
+    }
   },
 
   // 获取出发位置
@@ -111,7 +178,7 @@ Page({
     wx.chooseLocation({
       success: function (res) {
         that.setData({
-          'data.formData.departure': res.address
+          'formData.departure': res.address
         })
       }
     })
@@ -122,7 +189,7 @@ Page({
     wx.chooseLocation({
       success: function (res) {
         that.setData({
-          'data.formData.destination': res.address
+          'formData.destination': res.address
         })
       }
     })

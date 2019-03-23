@@ -38,6 +38,7 @@ class TripInfo(models.Model):
     created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, auto_now_add=False)
     deleted_at = models.DateTimeField(null=True,default=None)
+    isAgree = models.CharField(max_length=10,null=True,default=None)
 
 class HotTripSearch(models.Model):
     departure = models.CharField(max_length=30,default='',null=True)

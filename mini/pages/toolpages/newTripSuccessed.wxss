@@ -1,3 +1,4 @@
 /* pages/toolpages/newTripSuccessed.wxss */
 .center {text-align: center}
-.notice-text {margin: 10rpx}
+.notice-text {margin: 30rpx}
+.pdt150{padding-top: 150rpx;}

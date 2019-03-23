@@ -106,7 +106,7 @@ def myTripList(request):
     return HttpResponse(json.dumps(tripList,default = myconverter))
 
 def createOrUpdateTrip(request):
-    tripId = request.GET.get('tripId')
+    tripId = request.POST.get('tripId')
     if tripId:
         try:
             obj = TripInfo.objects.get(id=tripId)
@@ -121,16 +121,20 @@ def createOrUpdateTrip(request):
 
     obj.departure = request.POST.get('departure')
     obj.destination = request.POST.get('destination')
-    obj.leave_date = request.POST.get('leave_date')
-    obj.leave_time = request.POST.get('leave_time')
-    obj.price = request.POST.get('price')
+    if not request.POST.get('leave_date') is None and not request.POST.get('leave_date') =='null':
+        obj.leave_date = request.POST.get('leave_date')
+    if not request.POST.get('leave_time') is None and not request.POST.get('leave_time') =='null':
+        obj.leave_time = request.POST.get('leave_time')
+    # obj.price = request.POST.get('price')
     obj.vehicle = request.POST.get('vehicle')
-    obj.seats_count = request.POST.get('seats_count')
-    obj.people_count = request.POST.get('people_count')
+    if not request.POST.get('seats_count') is None and not request.POST.get('seats_count') =='null':
+        obj.seats_count = request.POST.get('seats_count')
+    if not request.POST.get('people_count') is None and not request.POST.get('people_count') =='null':
+        obj.people_count = request.POST.get('people_count')
     obj.contact_name = request.POST.get('contact_name')
     obj.contact_gender = request.POST.get('contact_gender')
     obj.contact_phone = request.POST.get('contact_phone')
-    # obj.isAgree = request.POST.get('isAgree')
+    obj.isAgree = request.POST.get('isAgree')
     obj.demo = request.POST.get('demo')
     obj.user_id = request.POST.get('user_id')
 
@@ -138,7 +142,6 @@ def createOrUpdateTrip(request):
     return JsonResponse({'message':'发布成功','info':'success'})
 
 def deleteTrip(request):
-    return JsonResponse({'message':'该行程不存在','info':'error'})
 
     tripId = request.GET.get('tripId')
     try:

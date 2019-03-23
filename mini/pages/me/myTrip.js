@@ -34,9 +34,12 @@ Page({
   fetchList: function () {
 
     var that = this;
+    // const value = wx.getStorageSync('user_id');
+    const value = app.globalData.user_id;
+
     const data = {
       page: this.data.curPage,
-      user_id: this.data.userInfo.user_id,
+      user_id: value,
     }
     wx.request({
       url: app.globalData.requestUrl + '/myTripList',
@@ -81,6 +84,66 @@ Page({
       }
     })
   },
+  editItem: function (e){
+    const id = e.currentTarget.id;
+    const type = e.currentTarget.dataset.type;
+    let typetext ='';
+    if(type == 1){
+      typetext='passenger'
+    }else if(type==2){
+      typetext = 'driver'
+    }
+    wx.redirectTo({
+      url: '/pages/newTrip/newTrip?type='+typetext+'&tripId='+id
+    })
+  },
+  deleteItem: function(e) {
+    var that = this;
+    const id = e.currentTarget.id;
+    wx.showModal({
+      title: '',
+      content: '确定删除该行程吗?',
+      confirmText: '确定',
+      confirmColor: '#09BB07',
+      success(res) {
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.requestUrl + '/trip/delete'+'?tripId='+id,
+            success: function (d) {
+              if (d.data.info == 'success') {
+                wx.showToast({
+                  title: d.data.message,
+                  icon: 'success',
+                  duration: 2000
+                });
+                // 从行程列表中删除
+                list = list.filter(function(val){
+                  return val.id != id;
+                });
+                that.setData({
+                  list:list
+                })
+                
+              }else {
+                wx.showModal({
+                  title: '',
+                  content: d.data.message,
+                  confirmText: '确定',
+                  confirmColor: '#09BB07',
+                  success(res){
+
+                  }
+                })
+              }
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -95,7 +158,9 @@ Page({
     // setdata userid
     var that = this;
     try {
-      const value = wx.getStorageSync('user_id')
+      // const value = wx.getStorageSync('user_id')
+      const value = app.globalData.user_id;
+
       // console.log(value)
       // wx.getStorageInfo({
       //   success: function(res) {

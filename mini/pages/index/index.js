@@ -226,8 +226,10 @@ Page({
   },
   getHotTrips: function(){
     var that = this;
+    // const value = wx.getStorageSync('user_id')
+    const value = app.globalData.user_id;
     const data = {
-      user_id: this.data.userInfo.user_id
+      user_id: value
     }
     wx.request({
       url: app.globalData.requestUrl + '/getHotTrips',
@@ -261,7 +263,8 @@ Page({
     // setdata userid
     var that = this;
     try {
-      const value = wx.getStorageSync('user_id')
+      // const value = wx.getStorageSync('user_id')
+      const value = app.globalData.user_id;
       // console.log(value)
       // wx.getStorageInfo({
       //   success: function(res) {

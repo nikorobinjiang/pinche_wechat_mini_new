@@ -13,8 +13,8 @@ Page({
       url: '/pages/index/index',
     })
   },
-  toMyTrip() {
-    wx.switchTab({
+  toMyTrip:function() {
+    wx.redirectTo({
       url: '/pages/me/myTrip',
     })
   },

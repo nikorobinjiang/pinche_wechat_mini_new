@@ -15,7 +15,7 @@ Page({
   // 跳转
   toMyTrips: function() {
     wx.navigateTo({
-      url: 'myTrip?id=1'
+      url: 'myTrip'
     })
   },
   // 分享

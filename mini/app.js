@@ -19,11 +19,14 @@ App({
                 key: 'userInfo',
                 data: e.userInfo
               });
+              // 全局变量
+              that.globalData.userInfo = e.userInfo;
+              // 微信登录
               wx.login({
                 success: res1 => {
                   // 发送 res1.code 到后台换取 openId, sessionKey, unionId
                   if (res1.code) {
-                    // 发起网络请求
+                    // 发起网络请求 后台登录
                     wx.request({
                       url: this.globalData.requestUrl + '/mini_login',
                       data: {
@@ -33,6 +36,9 @@ App({
                         iv: e.iv
                       },
                       success(result) {
+                        // 全局存储
+                        that.globalData.user_id = result.data.user_id;
+                        // 本地存储
                         wx.setStorageSync('user_id', result.data.user_id);
                       }
                     })
@@ -45,13 +51,16 @@ App({
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
+                this.userInfoReadyCallback(res);
               }
             }
           })
         }
       }
     })
+  },
+  userInfoReadyCallback: function(res) {
+    console.log('页面加载成功')
   },
   globalData: {
     requestUrl : 'http://127.0.0.1:8080'

@@ -16,7 +16,7 @@
               <view class="flex-wrp pdl20">
                 <input class='bd-bottom pdb10' placeholder='出发地' bindinput='setInputData' data-type='departure' name="departure" maxlength='30' value="{{search.departure}}"/>
                 <view class="">
-                  <image bindtap='handleLocation' data-type='departure' src='../../resources/img/location-icon.png' class="icon-location-outline"></image>
+                  <image bindtap='handleLocation' data-type='departure' src='../../resources/img/location.png' class="icon-location-outline"></image>
                 </view>
               </view>
             </view>
@@ -27,7 +27,7 @@
               <view class='flex-wrp pdl20'>
                 <input class='bd-bottom pdb10' placeholder='目的地' bindinput='setInputData' data-type="destination" name="destination" maxlength='30' value="{{search.destination}}"/>
                 <view>
-                  <image bindtap='handleLocation' data-type='destination' src='../../resources/img/location-icon.png' class="icon-location-outline"></image>
+                  <image bindtap='handleLocation' data-type='destination' src='../../resources/img/location.png' class="icon-location-outline"></image>
                 </view>
               </view>
             </view>
@@ -62,11 +62,8 @@
           </button>
           <button form-type='reset' bindtap='resetForm' size='mini' class='text-btn text-color-2 w100'>清空搜索</button>
         </view>
-        
       </view>
-      
     </form>
-    
   </view>
   <!-- search end -->
   <!-- tab -->
@@ -93,30 +90,46 @@
         <view class='top-userinfo'>
           <view class='flex-wrp'>
               <image src='../../resources/img/avatar.jpg' class="flex-item userinfo-avatar userinfo-avatar-cos"></image>
-              <text class='flex-item w50'>{{item.contact_name}}</text>
+              <image wx:if="{{item.contact_gender==1}}" src='../../resources/img/mars-icon.png' class='gender-icon'></image>
+              <image wx:elif="{{item.contact_gender==2}}" src='../../resources/img/venus-icon.png' class='gender-icon'></image>
+              <view class='flex-item w50'>
+                <view>{{item.contact_name}}</view>
+              </view>
+              
             <view class='w30 align-right flex-item'>
-              <text wx:if="{{item.pc_type == 1 }}" class='label-type-medium label-passenger cos-label-type'>人找车</text>
-              <text wx:if="{{item.pc_type == 2 }}" class='label-type-medium label-driver cos-label-type'>车找人</text>
+              <view>
+                <text wx:if="{{item.pc_type == 1 }}" class='label-type-medium label-passenger cos-label-type'>人找车</text>
+                <text wx:if="{{item.pc_type == 2 }}" class='label-type-medium label-driver cos-label-type'>车找人</text>
+              </view>
             </view>
           </view>
         </view>
         <view class=''>
-          <text>{{item.departure}}->{{item.destination}}</text>
+          <text class='item-text-place'>{{item.departure}}</text>
+          <image wx:if="{{item.pc_type == 2 }}" class='icon-to' src='../../resources/img/to-icon1.png'></image>
+          <image wx:if="{{item.pc_type == 1 }}" class='icon-to' src='../../resources/img/to-icon2.png'></image>
+          <text class='item-text-place'>{{item.destination}}</text>
         </view>
         <view class=''>
-          <text>出发时间:{{item.leave_date}} {{item.leave_time}}</text>
-          <text wx:if="{{item.pc_type == 2 }}">还剩{{item.seats_count}}个座位</text>
-          <text wx:if="{{item.pc_type == 1 }}">需要{{item.people_count}}个座位</text>
+          <text class='item-text-leavetime'>出发:{{item.leave_date?item.leave_date:''}} {{item.leave_time ? item.leave_time : ''}}</text>
+          
         </view>
-        <view class=''>
-          <text>备注:{{item.memo}}</text>
+        <view class='item-text-memo'>
+          <text>备注: {{item.demo}}</text>
         </view>
-        <view class=''>
-          <button size='mini' id="{{item.contact_phone}}" bindtap='makeCall'>电话咨询</button>
-          <button size='mini' id="{{item.contact_wechat_account}}" bindtap='showWechatAccount'>微信咨询</button>
+        <view class='flex-wrp'>
+          <view class='flex-item width580'>
+            <image src='../../resources/img/people.png' class='item-icon-people'></image>
+            <text wx:if="{{item.pc_type == 2 }}">{{item.seats_count}}个座位</text>
+            <text wx:if="{{item.pc_type == 1 }}">{{item.people_count}}个人</text>
+          </view>
+          <view class='flex-item width420'>
+            <image id="{{item.contact_phone}}" bindtap='makeCall' class="phone-btn" src='../../resources/img/phone2.png'></image>
+            <image id="{{item.contact_wechat_account}}" bindtap='showWechatAccount' class="chat-btn" src='../../resources/img/chat-o.png'></image>
+            
+          </view>
         </view>
       </view>
-
       <view hidden="{{!searchLoading}}" class="weui-loadmore">
         <view class="weui-loading"></view>
         <view class="weui-loadmore__tips">正在加载</view>
@@ -125,7 +138,6 @@
           <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
       </view>
     </scroll-view>
-    
   </view>
   <!-- list end -->
 </view>

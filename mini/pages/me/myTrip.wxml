@@ -7,30 +7,47 @@
       <view class='pc-item content' wx:for = "{{list}}" wx:key = "{{item.id}}">
         <view class='top-userinfo'>
           <view class='flex-wrp'>
-            <view class='w30 align-right flex-item'>
-              <text wx:if="{{item.pc_type == 1 }}" class='label-type-medium label-passenger cos-label-type'>人找车</text>
-              <text wx:if="{{item.pc_type == 2 }}" class='label-type-medium label-driver cos-label-type'>车找人</text>
-            </view>
+            
           </view>
         </view>
         <view class=''>
-          <text>{{item.departure}}->{{item.destination}}</text>
+          <text class='item-text-place'>{{item.departure}}</text>
+          <image wx:if="{{item.pc_type == 2 }}" class='icon-to' src='../../resources/img/to-icon1.png'></image>
+          <image wx:if="{{item.pc_type == 1 }}" class='icon-to' src='../../resources/img/to-icon2.png'></image>
+          <text class='item-text-place'>{{item.destination}}</text>
         </view>
         <view class=''>
-          <text>出发时间:{{item.leave_date}} {{item.leave_time}}</text>
-          <text wx:if="{{item.pc_type == 2 }}">还剩{{item.seats_count}}个座位</text>
-          <text wx:if="{{item.pc_type == 1 }}">需要{{item.people_count}}个座位</text>
+          <text class='item-text-leavetime'>出发:{{item.leave_date}} {{item.leave_time}}</text>
+          
         </view>
-        <view class=''>
-          <text>备注:{{item.memo}}</text>
+        <view class='item-text-memo'>
+          <text>备注: {{item.demo}}</text>
         </view>
-        <view class=''>
-          <button size='mini' id="{{item.id}}" bindtap='editItem'>修改</button>
-          <button size='mini' id="{{item.id}}" bindtap='deleteItem'>删除</button>
+        <view class='flex-wrp'>
+          <view class='flex-item mgr20'>
+            <text wx:if="{{item.pc_type == 1 }}" class='label-type-medium label-passenger cos-label-type'>人找车</text>
+            <text wx:if="{{item.pc_type == 2 }}" class='label-type-medium label-driver cos-label-type'>车找人</text>
+          </view>
+          <view class='flex-item width250'>
+            <image src='../../resources/img/people.png' class='item-icon-people'></image>
+            <text wx:if="{{item.pc_type == 2 }}">{{item.seats_count}}个座位</text>
+            <text wx:if="{{item.pc_type == 1 }}">{{item.people_count}}个人</text>
+          </view>
+          <view class=''>
+            <button size='mini' class='mgr20 weui-btn weui-btn_mini weui-btn_primary' id="{{item.id}}" data-type="{{item.pc_type}}"  bindtap='editItem' type='primary'>修改</button>
+            <button class='weui-btn mini-btn' type='warn' size='mini' id="{{item.id}}" bindtap='deleteItem'>删除</button>
+          </view>
         </view>
+        
       </view>
-      <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
-      <view class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全</view>
+      
+      <view hidden="{{!searchLoading}}" class="weui-loadmore">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+      </view>
+      <view hidden="{{!searchLoadingComplete}}" class="weui-loadmore weui-loadmore_line">
+          <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+      </view>
     </scroll-view>
     
     

@@ -1,6 +1,6 @@
 <!--pages/toolpages/newTripSuccessed.wxml-->
 <view>
-  <view class='center'>
+  <view class='center pdt150'>
     <icon type="success" size="100" color="#09BB07"/>
     <view><text class='notice-text'>行程发布成功</text></view>
   </view>

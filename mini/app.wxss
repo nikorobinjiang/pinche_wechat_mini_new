@@ -12,8 +12,8 @@ page {color: #353535;}
 .flex-wrp {display: flex;}
 
 .userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
+  width: 64px;
+  height: 64px;
   margin: 20rpx;
   border-radius: 50%;
 }
@@ -39,8 +39,8 @@ page {color: #353535;}
   color: #fff;
 }
 .label-driver {
-  /* #4169E1 */
-  background-color: rebeccapurple;
+  /* rebeccapurple*/
+  background-color: #4169E1;
 }
 .label-passenger {
   background-color: #EEAD0E;
@@ -57,17 +57,23 @@ page {color: #353535;}
 .w40 {width: 40%}
 .w30 {width: 30%}
 .width600 {width: 600rpx}
+.width580 {width: 580rpx}
+.width420 {width: 420rpx}
+.width250 {width: 250rpx;}
 .align-right{text-align: right}
-.main-text{color: #303133}
+.main-text{color: #303133;font-size: 38rpx;}
 .mg20 {margin: 20rpx;}
 .mgt20 {margin-top: 20rpx;}
+.mgt25 {margin-top: 25rpx;}
 .mgb20 {margin-bottom: 20rpx;}
 .mgt150 {margin-top: 150rpx;}
+.mgr20 {margin-right: 20rpx;}
 .pd10 {padding: 10rpx;}
 .pd15 {padding: 15rpx;}
 .pd20 {padding: 20rpx}
 .pdl20 {padding-left: 20rpx}
 .pdb10 {padding-bottom: 10rpx;}
+.pdb20 {padding-bottom: 20rpx;}
 .btline-3 {border-bottom: 2rpx solid #EBEEF5;}
 .text-color-1 {color: #303133}
 .text-color-2 {color: #606266}
@@ -81,6 +87,28 @@ page {color: #353535;}
 .fontsize32 {font-size: 32rpx}
 .main .loadingbtn {background-color: #179B16;}
 .main .disabledbtn {background-color: #9ED99D;}
+/* trip item */
+.weui-loadmore .weui-loadmore__tips_in-line {background-color: #f6f6f6}
+.item-text-place{font-size: 30rpx;font-weight: bold;}
+.item-text-leavetime{font-size: 30rpx;color: #606266;}
+.item-icon-people{width: 34rpx;height: 34rpx;}
+.item-text-memo{font-size: 30rpx;color: #606266;}
+.section_result_list,.section_search {
+  padding: 20rpx;
+}
+.section_result_list scroll-view {
+  height: 1000px;
+}
+.pc-item {
+  margin-bottom: 20rpx;
+  font-size: 32rpx;
+}
+.gender-icon{width: 20px;height: 20px;border-radius: 50%;position: relative;left: -42rpx;}
+.icon-to{width: 40rpx;height: 40rpx;position:relative;
+top:12rpx;margin: 0 10rpx;
+}
+.phone-btn{width: 46px;height: 30px;border-radius: 6px;margin: 0 10rpx;}
+.chat-btn{width: 42px;height: 26px;border-radius: 6px;margin: 0 5px;border: 2px solid #ebb631}
 /* 导入 */
 page {
   line-height: 1.6;

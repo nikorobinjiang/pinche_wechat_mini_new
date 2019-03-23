@@ -71,12 +71,7 @@
   color: #fff;
   border-radius: 50rpx;
 }
-.section_result_list,.section_search {
-  padding: 20rpx;
-}
-.section_result_list scroll-view {
-  height: 1000rpx;
-}
+
 .separate-line{
   background-color: #f9f9f9;
   font-size: 32rpx;
@@ -84,12 +79,7 @@
   color: #909399;
 }
 
-.pc-item {
-  margin-bottom: 20rpx;
-  font-size: 32rpx;
-}
 .icon-outter {padding-top: 15rpx}
 .icon-narrow {width: 45rpx;height: 45rpx;margin: 0 15rpx}
 .date-label {font-size: 32rpx;color: #777}
 .height1000{height: 1000rpx;}
-.weui-loadmore .weui-loadmore__tips_in-line {background-color: #f6f6f6}

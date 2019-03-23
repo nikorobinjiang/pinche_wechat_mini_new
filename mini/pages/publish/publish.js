@@ -11,14 +11,14 @@ Page({
   // 新建路线 司机
   newTripDriver(e,type) {
     wx.navigateTo({
-      url: '../newTrip/newTrip?type=driver&id=1'
+      url: '../newTrip/newTrip?type=driver'
     })
     
   },
   // 新建路线 乘客
   newTripPassenger(e, type) {
     wx.navigateTo({
-      url: '../newTrip/newTrip?type=passenger&id=1'
+      url: '../newTrip/newTrip?type=passenger'
     })
   },
 
