@@ -34,8 +34,8 @@ Page({
   fetchList: function () {
 
     var that = this;
-    // const value = wx.getStorageSync('user_id');
-    const value = app.globalData.user_id;
+    const value = wx.getStorageSync('user_id');
+    // const value = app.globalData.user_id;
 
     const data = {
       page: this.data.curPage,
@@ -158,8 +158,8 @@ Page({
     // setdata userid
     var that = this;
     try {
-      // const value = wx.getStorageSync('user_id')
-      const value = app.globalData.user_id;
+      const value = wx.getStorageSync('user_id')
+      // const value = app.globalData.user_id;
 
       // console.log(value)
       // wx.getStorageInfo({

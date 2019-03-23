@@ -63,6 +63,6 @@ App({
     console.log('页面加载成功')
   },
   globalData: {
-    requestUrl : 'http://127.0.0.1:8080'
+    requestUrl: 'http://129.211.134.29:8080'
   }
 })

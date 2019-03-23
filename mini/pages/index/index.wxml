@@ -8,7 +8,7 @@
           <view class='hot-search-label'>
             <text>常用:</text>
           </view>
-          <button wx:for = "{{hotTripList}}" wx:for-item="hItem" wx:key="{{hItem.id}}" class='hot-search-item' size='mini' data-dep='{{hItem.departure}}' data-des='{{hItem.destination}}' bindtap='chooseHot'>{{hItem.departure}}{{narrow_icon}}{{hItem.destination}}</button>
+          <button wx:for = "{{[]}}" wx:for-item="hItem" wx:key="{{hItem.id}}" class='hot-search-item' size='mini' data-dep='{{hItem.departure}}' data-des='{{hItem.destination}}' bindtap='chooseHot'>{{hItem.departure}}{{narrow_icon}}{{hItem.destination}}</button>
         </view>
         <view class='section'>
           <view class="flex-wrp mgt20" style="flex-direction:row;">

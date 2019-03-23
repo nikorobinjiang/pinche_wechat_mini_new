@@ -84,8 +84,10 @@ DATABASES = {
         'NAME': 'oly_math',
         'USER': 'root',
         'PASSWORD': ' zhuxiujuan@123',
-        'HOST': '129.211.134.29',
+        # 'HOST': '129.211.134.29',
+        'HOST': '127.0.0.1',
         'PORT': '3336',
+        'OPTIONS': {'charset': 'utf8mb4'}  # 字符集为utf8mb4
     }
 }
 
