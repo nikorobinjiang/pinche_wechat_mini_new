@@ -44,6 +44,7 @@ def getTripList(request):
     tabType = request.GET.get('tabType',3)
     # 搜索条件
     searchParams =  request.GET.get('search')
+    searchParams = searchParams.decode('utf-8')
     searchParams = json.loads(searchParams)
     search_departure = searchParams['departure']
     search_destination = searchParams['destination']
