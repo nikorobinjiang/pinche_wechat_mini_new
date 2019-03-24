@@ -8,7 +8,7 @@
           <view class='hot-search-label'>
             <text>常用:</text>
           </view>
-          <button wx:for = "{{[]}}" wx:for-item="hItem" wx:key="{{hItem.id}}" class='hot-search-item' size='mini' data-dep='{{hItem.departure}}' data-des='{{hItem.destination}}' bindtap='chooseHot'>{{hItem.departure}}{{narrow_icon}}{{hItem.destination}}</button>
+          <button wx:for = "{{hotTripList}}" wx:for-item="hItem" wx:key="{{hItem.id}}" class='hot-search-item' size='mini' data-dep='{{hItem.departure}}' data-des='{{hItem.destination}}' bindtap='chooseHot'>{{hItem.departure}}{{narrow_icon}}{{hItem.destination}}</button>
         </view>
         <view class='section'>
           <view class="flex-wrp mgt20" style="flex-direction:row;">
@@ -89,11 +89,11 @@
       <view class='pc-item content' wx:for = "{{list}}" wx:key = "{{item.id}}">
         <view class='top-userinfo'>
           <view class='flex-wrp'>
-              <image src='../../resources/img/avatar.jpg' class="flex-item userinfo-avatar userinfo-avatar-cos"></image>
+              <image src="{{item.user__avatarUrl}}" class="flex-item userinfo-avatar userinfo-avatar-cos"></image>
               <image wx:if="{{item.contact_gender==1}}" src='../../resources/img/mars-icon.png' class='gender-icon'></image>
               <image wx:elif="{{item.contact_gender==2}}" src='../../resources/img/venus-icon.png' class='gender-icon'></image>
               <view class='flex-item w50'>
-                <view>{{item.contact_name}}</view>
+                <view>{{item.contact_name}}【{{item.user__nickName}}】</view>
               </view>
               
             <view class='w30 align-right flex-item'>

@@ -203,6 +203,8 @@ Page({
               price: item.price,
               seats_count: item.seats_count,
               status: item.status,
+              user__avatarUrl: item.user__avatarUrl,
+              user__nickName: item.user__nickName
             }
             list.push(obj);
           })

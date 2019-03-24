@@ -24,7 +24,9 @@ import pytz
 #     return render(request,'login.html',context)
 
 def getHotTrips(request):
-    userId = request.GET.get('user_id',0)
+    userId = request.GET.get('user_id')
+    if userId == None:
+        userId = 0
     result = HotTripSearch.objects.filter(Q(show=1) | Q(user_id=userId)).filter(deleted_at=None).values('id','departure','destination').all()[:5]
     # return HttpResponse(json.dumps(result,default = myconverter))
     result = list(result)
