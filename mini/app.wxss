@@ -16,6 +16,7 @@ page {color: #353535;}
   height: 64px;
   margin: 20rpx;
   border-radius: 50%;
+  background-color: #DCDFE6;
 }
 .fondation {
   background-color: #f6f6f6;
@@ -85,6 +86,7 @@ page {color: #353535;}
 .border-4 {border: 2rpx solid #F2F6FC}
 .bd-bottom {border-bottom: 2rpx solid #DCDFE6}
 .fontsize32 {font-size: 32rpx}
+.fontsize26 {font-size: 26rpx}
 .main .loadingbtn {background-color: #179B16;}
 .main .disabledbtn {background-color: #9ED99D;}
 /* trip item */

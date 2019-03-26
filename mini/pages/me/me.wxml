@@ -3,7 +3,10 @@
   
   <view class="flex-wrp userinfo-content bgw" style="flex-direction:row;">
     <view class="flex-item">
-      <image src='{{ userInfo.avatarUrl }}' class="userinfo-avatar"></image>
+      <image wx:if="{{hasUserInfo}}" src='{{ userInfo.avatarUrl }}' class="userinfo-avatar"></image>
+      <view wx:if="{{!hasUserInfo}}" class='userinfo-avatar'>
+        <button open-type='getUserInfo' class='text-btn text-color-2 loginbtn fontsize26' bindgetuserinfo="onGotUserInfo">点击登录</button>
+      </view>
     </view>
     <view class="flex-item mg20">
       <text class='userinfo-name'>{{ userInfo.nickName }}</text>

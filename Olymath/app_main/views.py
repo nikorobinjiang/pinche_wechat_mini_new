@@ -124,15 +124,15 @@ def createOrUpdateTrip(request):
 
     obj.departure = request.POST.get('departure')
     obj.destination = request.POST.get('destination')
-    if not request.POST.get('leave_date') is None and not request.POST.get('leave_date') =='null':
+    if not request.POST.get('leave_date') is None and not request.POST.get('leave_date') =='null' and not request.POST.get('leave_date') =='':
         obj.leave_date = request.POST.get('leave_date')
-    if not request.POST.get('leave_time') is None and not request.POST.get('leave_time') =='null':
+    if not request.POST.get('leave_time') is None and not request.POST.get('leave_time') =='null' and not request.POST.get('leave_time') =='':
         obj.leave_time = request.POST.get('leave_time')
     # obj.price = request.POST.get('price')
     obj.vehicle = request.POST.get('vehicle')
-    if not request.POST.get('seats_count') is None and not request.POST.get('seats_count') =='null':
+    if not request.POST.get('seats_count') is None and not request.POST.get('seats_count') =='null' and not request.POST.get('seats_count') =='':
         obj.seats_count = request.POST.get('seats_count')
-    if not request.POST.get('people_count') is None and not request.POST.get('people_count') =='null':
+    if not request.POST.get('people_count') is None and not request.POST.get('people_count') =='null' and not request.POST.get('people_count') =='':
         obj.people_count = request.POST.get('people_count')
     obj.contact_name = request.POST.get('contact_name')
     obj.contact_gender = request.POST.get('contact_gender')
@@ -163,7 +163,7 @@ def tripDetail(request):
     try:
         obj = TripInfo.objects.values('id', 'departure', 'destination', 'leave_date', 'leave_time', 'seats_count', 'people_count', 
         'pc_type', 'demo', 'price', 'status', 'contact_phone','contact_gender', 'contact_wechat_account', 'contact_gender', 'contact_name',
-        'created_at', 'updated_at', 'user__nickName', 'user__avatarUrl').get(id=tripId)
+        'created_at', 'updated_at', 'user__nickName', 'user__avatarUrl','isAgree').get(id=tripId)
     except TripInfo.DoesNotExist:
         return JsonResponse({'message':'该行程不存在','info':'error'})
     # return JsonResponse(json.dumps(obj,default = myconverter),safe=False)

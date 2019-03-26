@@ -32,7 +32,6 @@
   width:150rpx;
   padding:22rpx 30rpx 20rpx 30rpx;
   text-align:center;
-
 }
 .nav-box {
   border-bottom: 2rpx solid #DCDFE6;
@@ -51,6 +50,18 @@
   background-color: #09BB07;
   color: #fff;
   width: 90%;
+}
+.icon-narrow-btn-search{
+  width: 38rpx;
+  height: 38rpx;
+  position: relative;
+  top: 10rpx;
+}
+.hotsearch-btn-text{
+  max-width: 260rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 .mgcenter {margin: 0 auto}
 .search-button::after{border: none;}

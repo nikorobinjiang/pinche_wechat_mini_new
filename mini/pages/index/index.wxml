@@ -8,7 +8,13 @@
           <view class='hot-search-label'>
             <text>常用:</text>
           </view>
-          <button wx:for = "{{hotTripList}}" wx:for-item="hItem" wx:key="{{hItem.id}}" class='hot-search-item' size='mini' data-dep='{{hItem.departure}}' data-des='{{hItem.destination}}' bindtap='chooseHot'>{{hItem.departure}}{{narrow_icon}}{{hItem.destination}}</button>
+          <button wx:for = "{{hotTripList}}" wx:for-item="hItem" wx:key="{{hItem.id}}" class='hot-search-item' size='mini' data-dep='{{hItem.departure}}' data-des='{{hItem.destination}}' bindtap='chooseHot'>
+            <view class='flex-wrp'>
+              <view class='flex-item hotsearch-btn-text'>{{hItem.departure}}</view>
+              <image class='flex-item icon-narrow-btn-search' src='../../resources/img/narrow-white.png'/>
+              <view class='flex-item hotsearch-btn-text'>{{hItem.destination}}</view>
+            </view>
+          </button>
         </view>
         <view class='section'>
           <view class="flex-wrp mgt20" style="flex-direction:row;">
@@ -21,7 +27,7 @@
               </view>
             </view>
             <view class='icon-outter'>
-              <image bindtap='switchLocation' class='icon-narrow' src='../../resources/img/narrow-both.png'/>
+              <image bindtap='switchLocation' class='icon-narrow' src='../../resources/img/narrow.png'/>
             </view>
             <view class="flex-item pd15 fontsize32">
               <view class='flex-wrp pdl20'>

@@ -83,11 +83,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'oly_math',
         'USER': 'root',
-        'PASSWORD': 'zhuxiujuan@123',
-        # 'PASSWORD': '',
+        # 'PASSWORD': 'zhuxiujuan@123',
+        'PASSWORD': '',
         # 'HOST': '129.211.134.29',
         'HOST': '127.0.0.1',
-        'PORT': '3336',
+        'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'}  # 字符集为utf8mb4
     }
 }
@@ -130,6 +130,26 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 日志
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '/debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
 
 # 微信小程序
 WECHAT_MINI = {

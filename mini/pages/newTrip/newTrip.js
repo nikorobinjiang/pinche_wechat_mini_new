@@ -25,11 +25,6 @@ Page({
     tripDetail:{
     },
     formData: {
-      // name: '',
-      // departure: '',
-      // destination: '',
-      // seats_count: 0,
-      // people_count: 0
     },
     start:date.getFullYear() + '-' + (date.getMonth()+1) + '-'+date.getDate(),
     end: (date.getFullYear()+3) + '-' + (date.getMonth() + 1) + '-' + date.getDate()
@@ -76,6 +71,7 @@ Page({
     this.setData({
       isAgree: !!e.detail.value.length
     });
+
   },
   navback: function(){
     wx.navigateBack({
@@ -99,6 +95,24 @@ Page({
           this.showTopTips('出发地和目的地不能为空');
           return;
         }
+        // 是否同意协议
+        if(!this.data.isAgree){
+          wx.showModal({
+            title: '这个很关键',
+            content: '请先阅读并同意拼车协议',
+            // confirmText: '确定',
+            confirmColor: '#09BB07',
+            success(res) {
+              if (res.confirm) {
+                
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+          return;
+        }
+
         wx.request({
           url: app.globalData.requestUrl + '/trip/create',
           method: 'POST',
@@ -164,6 +178,12 @@ Page({
               genderItems[i].checked = genderItems[i].value == d.data.contact_gender;
               that.setData({
                 genderItems: genderItems
+              });
+            }
+            // isAgree check
+            if(d.data.isAgree == 'agree'){
+              that.setData({
+                isAgree: true
               });
             }
           }

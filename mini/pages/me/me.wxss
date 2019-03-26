@@ -9,7 +9,19 @@
   float: right;
   padding-right: 20rpx;
 }
-
+.nouserinfo{
+ 
+}
+.loginbtn{
+  font-size:26rpx;
+  padding:0;
+  position:relative;
+  top:27rpx;
+  border-radius:100%;
+  text-decoration:underline;
+  width:100%;
+  background-color: #DCDFE6;
+}
 .weui-cell__bd {
   -webkit-box-flex: 1;
   -webkit-flex: 1;

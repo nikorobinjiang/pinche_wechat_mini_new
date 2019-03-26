@@ -32,7 +32,11 @@ def miniLogin(request):
     res = urllib.request.urlopen(url)
     res = res.read()
     res = json.loads(res)
-
+    # logger
+    logger = logging.getLogger(__name__)
+    logger.info(res)
+    # return JsonResponse(res)
+    
     if 'errcode' in res.keys():
         return HttpResponse(res['errmsg'])
     # return HttpResponse(res['session_key'])
