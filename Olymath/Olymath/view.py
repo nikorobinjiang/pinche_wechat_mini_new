@@ -22,6 +22,7 @@ def login(request):
     return render(request,'login.html',context)
 
 def miniLogin(request):
+
     # 获取请求参数
     encryptedData = request.GET.get('encryptedData')
     signature = request.GET.get('signature')

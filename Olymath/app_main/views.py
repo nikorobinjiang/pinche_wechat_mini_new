@@ -86,6 +86,8 @@ def myTripList(request):
     query = TripInfo.objects
     # 用户id
     userId = request.GET.get('user_id')
+    if userId == None:
+        userId = 0
     query = query.filter(user_id=userId)
     # 已删除
     query = query.filter(deleted_at=None)
