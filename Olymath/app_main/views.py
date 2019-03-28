@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse,JsonResponse
 from app_main.models import TripInfo
 from app_main.models import HotTripSearch
+from app_main.models import TripDemoExamples
 
 from django.db.models import Q
 
@@ -170,7 +171,16 @@ def tripDetail(request):
         return JsonResponse({'message':'该行程不存在','info':'error'})
     # return JsonResponse(json.dumps(obj,default = myconverter),safe=False)
     return JsonResponse(obj)
-  
+def getDemoExamples(request):
+    type = request.GET.get('tripType',3)
+    if type == 'passenger':
+        type = 1
+    elif type == 'driver':
+        type = 2
+    demoList = TripDemoExamples.objects.filter(show=type).values('id','content','created_at').all()[:5]
+    demoList = list(demoList)
+    return HttpResponse(json.dumps(demoList,default = myconverter))
+
 def myconverter(o):
     if isinstance(o, datetime) or isinstance(o, date) or isinstance(o, time):
         return o.__str__()

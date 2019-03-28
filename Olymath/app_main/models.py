@@ -48,4 +48,8 @@ class HotTripSearch(models.Model):
     show = models.CharField(max_length=2,default='',null=True)
     deleted_at = models.DateTimeField(null=True,default=None)
     
-
+class TripDemoExamples(models.Model):
+    content = models.CharField(max_length=255,default='',null=True)
+    created_at = models.DateTimeField(auto_now=False, auto_now_add=True)
+    show = models.CharField(max_length=2,default='',null=True,help_text = '1-找车 2-找人 3-全部')
+    deleted_at = models.DateTimeField(null=True,default=None)
