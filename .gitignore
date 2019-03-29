@@ -1,2 +1,3 @@
-/Olymath/app_main/__pycache__/*
-/Olymath/Olymath/__pycache__/*
+Olymath/app_main/__pycache__/*
+Olymath/Olymath/__pycache__/*
+*.pyc
