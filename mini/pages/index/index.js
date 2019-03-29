@@ -1,7 +1,28 @@
 //index.js
 //获取应用实例
-const app = getApp()
-
+const app = getApp();
+// 当前时间
+const date = new Date();
+let cur_month = (date.getMonth() + 1);
+let cur_day = date.getDate();
+let cur_hour = date.getHours();
+let cur_minute = date.getMinutes();
+// 格式化时间字符串
+if(cur_month<=9){
+  cur_month = '0' + '' + cur_month;
+}
+if (cur_day <= 9){
+  cur_day = '0' + '' + cur_day;
+}
+if(cur_hour<=9){
+  cur_hour = '0'+''+cur_hour;
+}
+if(cur_minute<=9){
+  cur_minute = '0'+''+cur_minute;
+}
+const cur_date = date.getFullYear() + '-' + cur_month + '-' + cur_day;
+const cur_time = cur_hour + ':' + cur_minute + ':' + date.getSeconds();
+console.log(cur_time);
 // 拼车列表
 var list = new Array();
 
@@ -187,6 +208,12 @@ Page({
       success: function (res) {
         if(res.data.length>0) {
           res.data.forEach(function (item) {
+            // 是否已过发车时间
+            let expired = false;
+            if (item.leave_date < cur_date || (item.leave_date == cur_date && item.leave_time < cur_time)){
+              expired = true;
+            }
+
             const obj = {
               id: item.id,
               departure: item.departure,
@@ -204,7 +231,8 @@ Page({
               seats_count: item.seats_count,
               status: item.status,
               user__avatarUrl: item.user__avatarUrl,
-              user__nickName: item.user__nickName
+              user__nickName: item.user__nickName,
+              expired: expired
             }
             list.push(obj);
           })

@@ -131,7 +131,7 @@ def createOrUpdateTrip(request):
         obj.leave_date = request.POST.get('leave_date')
     if not request.POST.get('leave_time') is None and not request.POST.get('leave_time') =='null' and not request.POST.get('leave_time') =='':
         obj.leave_time = request.POST.get('leave_time')
-    # obj.price = request.POST.get('price')
+    obj.price = request.POST.get('price',0)
     obj.vehicle = request.POST.get('vehicle')
     if not request.POST.get('seats_count') is None and not request.POST.get('seats_count') =='null' and not request.POST.get('seats_count') =='':
         obj.seats_count = request.POST.get('seats_count')
@@ -140,6 +140,7 @@ def createOrUpdateTrip(request):
     obj.contact_name = request.POST.get('contact_name')
     obj.contact_gender = request.POST.get('contact_gender')
     obj.contact_phone = request.POST.get('contact_phone')
+    obj.contact_wechat_account = request.POST.get('contact_wechat_account')
     obj.isAgree = request.POST.get('isAgree')
     obj.demo = request.POST.get('demo')
     obj.user_id = request.POST.get('user_id')

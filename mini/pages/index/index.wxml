@@ -117,7 +117,7 @@
           <text class='item-text-place'>{{item.destination}}</text>
         </view>
         <view class=''>
-          <text class='item-text-leavetime'>出发:{{item.leave_date?item.leave_date:''}} {{item.leave_time ? item.leave_time : ''}}</text>
+          <text class='item-text-leavetime'>出发:{{item.leave_date ? item.leave_date:''}} {{item.leave_time ? item.leave_time : ''}} <text wx:if="{{item.expired}}" class='item-text-leavetime-expired'>[已出发]</text></text>
           
         </view>
         <view class='item-text-memo'>

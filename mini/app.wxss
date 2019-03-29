@@ -95,6 +95,8 @@ page {color: #353535;}
 .weui-loadmore .weui-loadmore__tips_in-line {background-color: #f6f6f6}
 .item-text-place{font-size: 30rpx;font-weight: bold;}
 .item-text-leavetime{font-size: 30rpx;color: #606266;}
+.item-text-leavetime-expired{font-size: 30rpx;color: #F56C6C;}
+.danger-color{color: #F56C6C}
 .item-icon-people{width: 34rpx;height: 34rpx;}
 .item-text-memo{font-size: 30rpx;color: #606266;}
 .section_result_list,.section_search {
