@@ -34,8 +34,8 @@ def miniLogin(request):
     res = res.read()
     res = json.loads(res)
     # logger
-    logger = logging.getLogger(__name__)
-    logger.info(res)
+    # logger = logging.getLogger(__name__)
+    # logger.info(res)
     # return JsonResponse(res)
     
     if 'errcode' in res.keys():
