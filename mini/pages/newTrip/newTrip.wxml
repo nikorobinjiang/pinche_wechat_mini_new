@@ -106,6 +106,14 @@
             </view> 
         </view>
         <view class="weui-cells__title">备注信息</view>
+        <view>
+          <view class='demo-eg-lable'>
+            <text>例如:</text>
+          </view>
+          <button wx:for = "{{demoEgList}}" wx:for-item="dItem" wx:key="{{dItem.id}}" class='demo-eg-item' size='mini' data-content='{{dItem.content}}' bindtap='chooseEg'>
+          {{dItem.content}}
+          </button>
+        </view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell">
             <view class="weui-cell__bd">

@@ -148,6 +148,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const value = wx.getStorageSync('user_id')
+    if (!value) {
+      wx.redirectTo({
+        url: "/pages/toolpages/login",
+      })
+    }
     list = [];
     this.setData({
       list: list,
@@ -167,9 +173,9 @@ Page({
       //     console.log(res.data.user_id);
       //   },
       // })
-      if (value) {
-        that.setData({
-          'userInfo.user_id': value
+      if (!value) {
+        wx.redirectTo({
+          url: "/pages/toolpages/login",
         })
       }
     } catch (e) {

@@ -59,10 +59,42 @@ App({
       }
     })
   },
+  // 微信登录 调用后台接口登录
+  myLogin: function(e) {
+    let that = this;
+    // 微信登录
+    wx.login({
+      success: res1 => {
+        // 发送 res1.code 到后台换取 openId, sessionKey, unionId
+        if (res1.code) {
+          // 发起网络请求 后台登录
+          wx.request({
+            url: this.globalData.requestUrl + '/mini_login',
+            data: {
+              code: res1.code,
+              encryptedData: e.encryptedData,
+              signature: e.signature,
+              iv: e.iv
+            },
+            success(result) {
+              // 全局存储
+              that.globalData.user_id = result.data.user_id;
+              // 本地存储
+              wx.setStorageSync('user_id', result.data.user_id);
+            }
+          })
+        } else {
+          console.log('登录失败！' + res1.errMsg);
+          return false;
+        }
+      }
+    });
+    return 'success';
+  },
   userInfoReadyCallback: function(res) {
     console.log('页面加载成功')
   },
   globalData: {
-    requestUrl: 'http://127.0.0.1:8080'
+    requestUrl: 'http://129.211.134.29:8080'
   }
 })

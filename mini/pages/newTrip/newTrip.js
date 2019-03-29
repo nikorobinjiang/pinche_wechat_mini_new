@@ -27,7 +27,9 @@ Page({
     formData: {
     },
     start:date.getFullYear() + '-' + (date.getMonth()+1) + '-'+date.getDate(),
-    end: (date.getFullYear()+3) + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+    end: (date.getFullYear()+3) + '-' + (date.getMonth() + 1) + '-' + date.getDate(),
+    // 备注举例
+    demoEgList:[]
   },
   showTopTips: function (msg) {
     var that = this;
@@ -135,6 +137,15 @@ Page({
     }
     
   },
+  // 选择备注
+  chooseEg: function(e){
+    const oldText = this.data.formData.demo ? this.data.formData.demo :'';
+    const text = oldText + e.currentTarget.dataset.content + ';';
+    this.setData({
+      'formData.demo': text
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -190,6 +201,15 @@ Page({
         }
       })
     }
+    // 获取常用备注
+    wx.request({
+      url: app.globalData.requestUrl + '/trip/getDemoExamples?tripType=' + this.data.pubType,
+      success: function(res){
+        that.setData({
+          demoEgList: res.data
+        })
+      }
+    })
   },
 
   // 获取出发位置

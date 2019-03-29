@@ -1,0 +1,7 @@
+/* pages/toolpages/login.wxss */
+.lg-title{
+  font-size:50rpx;
+  font-weight:bold;
+  margin:20rpx;
+  text-align:center;
+}

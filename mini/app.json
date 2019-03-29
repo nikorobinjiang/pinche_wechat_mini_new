@@ -8,7 +8,8 @@
     "pages/toolpages/notice",
     "pages/toolpages/newTripSuccessed",
     "pages/me/myTrip",
-    "pages/newTrip/tripInfo"
+    "pages/newTrip/tripInfo",
+    "pages/toolpages/login"
   ],
   "window": {
     "backgroundTextStyle": "light",

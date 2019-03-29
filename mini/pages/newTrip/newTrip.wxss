@@ -2,3 +2,18 @@
 .driver {color: #4169E1}
 .passenger {color:	#EEAD0E;}
 .pub-title {text-align: center;padding: 10rpx;font-size: 48rpx;line-height:3;}
+.demo-eg-item{
+  margin:0 10rpx 10rpx 0;
+  background-color:#d2d2d2;
+  color:#fff;
+  border-radius:50rpx;
+}
+.demo-eg-item::after{border: none}
+.demo-eg-lable{
+  font-size:28rpx;
+  display:flex;
+  float:left;
+  line-height:2;
+  margin-right:15rpx;
+  margin-left: 30rpx;
+}

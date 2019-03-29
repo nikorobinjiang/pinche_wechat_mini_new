@@ -69,6 +69,8 @@ page {color: #353535;}
 .mgb20 {margin-bottom: 20rpx;}
 .mgt150 {margin-top: 150rpx;}
 .mgr20 {margin-right: 20rpx;}
+.mgl20{margin-left: 20rpx;} 
+.mgt100{margin-top: 100rpx;}
 .pd10 {padding: 10rpx;}
 .pd15 {padding: 15rpx;}
 .pd20 {padding: 20rpx}

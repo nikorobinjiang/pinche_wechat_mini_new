@@ -1,0 +1,12 @@
+<!--pages/toolpages/login.wxml-->
+<view class='main'>
+  <view class='mg20'>
+    <view class='lg-title'>登录</view>
+    <view class='fontsize32 text-color-1 mgl20 mgt100'>将获取以下权限</view>
+    <view class='fontsize32 text-color-3 mg20'>您的公开信息(昵称,头像等)</view>
+    <view>
+      <button type='primary' class='mg20' open-type='getUserInfo' bindgetuserinfo="onGotUserInfo">授权登录</button>
+      <button form-type='reset' bindtap='toHome' size='mini' class='text-btn text-color-2 w100'>不登录，无法创建行程</button>
+    </view>
+  </view>
+</view>
