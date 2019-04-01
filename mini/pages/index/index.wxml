@@ -120,9 +120,6 @@
           <text class='item-text-leavetime'>出发:{{item.leave_date ? item.leave_date:''}} {{item.leave_time ? item.leave_time : ''}} <text wx:if="{{item.expired}}" class='item-text-leavetime-expired'>[已出发]</text></text>
           
         </view>
-        <view class='item-text-memo'>
-          <text>备注: {{item.demo}}</text>
-        </view>
         <view class='flex-wrp'>
           <view class='flex-item width580'>
             <image src='../../resources/img/people.png' class='item-icon-people'></image>
@@ -135,6 +132,17 @@
             
           </view>
         </view>
+        <view>
+          <view wx:if="{{!item.collapse}}" class='item-text-more'>
+            <view>备注: {{item.demo}}</view>
+            <view>车型: {{ item.vehicle }}</view>
+          </view>
+          <view class='textcenter mgt10'>
+            <image wx:if="{{!item.collapse}}" src='../../resources/img/up.png' class='collapse-icon' data-type="{{item.id}}" bindtap='showless'></image>
+            <image wx:if="{{item.collapse}}" src='../../resources/img/down.png' class='collapse-icon' data-type="{{item.id}}" bindtap='showmore'></image>
+          </view>
+        </view>
+        
       </view>
       <view hidden="{{!searchLoading}}" class="weui-loadmore">
         <view class="weui-loading"></view>

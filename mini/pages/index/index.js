@@ -50,6 +50,7 @@ Page({
     countPerPage: 10,
     searchLoading: true,
     searchLoadingComplete: false
+    
   },
   // 输入搜索文字
   setInputData: function(e) {
@@ -213,6 +214,8 @@ Page({
             if (item.leave_date < cur_date || (item.leave_date == cur_date && item.leave_time < cur_time)){
               expired = true;
             }
+            // 默认折叠
+            let collapse = true;
 
             const obj = {
               id: item.id,
@@ -232,7 +235,8 @@ Page({
               status: item.status,
               user__avatarUrl: item.user__avatarUrl,
               user__nickName: item.user__nickName,
-              expired: expired
+              expired: expired,
+              collapse: collapse
             }
             list.push(obj);
           })
@@ -326,32 +330,32 @@ Page({
     list = [];
     this.fetchList()
   },
-  
-  onGotUserInfo: function(e) {
-    console.log(e)
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        if (res.code) {
-          // 发起网络请求
-          wx.request({
-            url: app.globalData.requestUrl + '/mini_login',
-            data: {
-              code: res.code,
-              encryptedData: e.detail.encryptedData,
-              signature: e.detail.signature,
-              iv: e.detail.iv
-            },
-            success(res) {
-              console.log(res)
-
-            }
-          })
-        } else {
-          console.log('登录失败！' + res.errMsg)
-        }
+  // 显示详细文字
+  showmore: function(e){
+    const id = e.currentTarget.dataset.type;
+    this.data.list.forEach(function(v,k){
+      if(v.id==id){
+        v.collapse = false;
       }
     })
+    this.setData({
+      list:this.data.list
+    })
+  },
+  // 隐藏详细文字
+  showless: function(e){
+    const id = e.currentTarget.dataset.type;
+    this.data.list.forEach(function (v, k) {
+      if (v.id == id) {
+        v.collapse = true;
+      }
+    })
+    this.setData({
+      list: this.data.list
+    })
+  },
+  
+  onGotUserInfo: function(e) {
+    
   }
 })

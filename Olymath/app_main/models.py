@@ -27,6 +27,7 @@ class TripInfo(models.Model):
     leave_time = models.TimeField(null=True)
     seats_count = models.PositiveSmallIntegerField(default=0,null=True)
     people_count = models.PositiveSmallIntegerField(default=0,null=True)
+    vehicle = models.CharField(max_length=20,default='')
     pc_type = models.CharField(max_length=2,default='1',help_text = '1-找车 2-找人')
     demo = models.TextField(default='',null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2,null=True)

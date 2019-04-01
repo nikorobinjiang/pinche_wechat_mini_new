@@ -62,8 +62,10 @@ page {color: #353535;}
 .width420 {width: 420rpx}
 .width250 {width: 250rpx;}
 .align-right{text-align: right}
+.textcenter{text-align: center}
 .main-text{color: #303133;font-size: 38rpx;}
 .mg20 {margin: 20rpx;}
+.mgt10 {margin-top: 10rpx;}
 .mgt20 {margin-top: 20rpx;}
 .mgt25 {margin-top: 25rpx;}
 .mgb20 {margin-bottom: 20rpx;}

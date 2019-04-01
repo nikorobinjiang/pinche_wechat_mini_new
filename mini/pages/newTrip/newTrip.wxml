@@ -79,7 +79,7 @@
                 <view class="weui-label">车型</view>
               </view>
               <view class="weui-cell__bd">
-                <input class="weui-input" type="text" name="vehicle" value="{{data.vehicle}}" placeholder="请填写车型"/>
+                <input class="weui-input" type="text" name="vehicle" value="{{formData.vehicle}}" placeholder="请填写车型"/>
               </view>
             </view>
             <view class="weui-cell weui-cell_input"  wx:if="{{pubType == 'driver'}}">
@@ -165,7 +165,7 @@
                 <view class="weui-label">微信号</view>
               </view>
               <view class="weui-cell__bd">
-                <input class="weui-input" name="contact_wechat_account" maxlength="11" value="{{formData.contact_wechat_account}}" type="number" placeholder="请输入微信号"/>
+                <input class="weui-input" name="contact_wechat_account" maxlength="11" value="{{formData.contact_wechat_account}}" type="text" placeholder="请输入微信号"/>
               </view>
             </view>
           </view>

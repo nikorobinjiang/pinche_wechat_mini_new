@@ -63,6 +63,17 @@
   text-overflow:ellipsis;
   white-space: nowrap;
 }
+.collapse-icon{
+  width: 50rpx;
+  height: 50rpx;
+  
+}
+.extra-text{
+  max-width: 630rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
 .mgcenter {margin: 0 auto}
 .search-button::after{border: none;}
 .hot-search {

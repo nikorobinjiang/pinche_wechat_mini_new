@@ -82,14 +82,12 @@ Page({
   },
   // 提交表单
   formSubmit: function(e) {
-    
     let data = e.detail.value;
     data.pc_type = this.data.pubType;
     // 获取本地存储的用户ID
     try {
-      // const value = wx.getStorageSync('user_id')
-      const value = app.globalData.user_id;
-
+      const value = wx.getStorageSync('user_id')
+      // const value = app.globalData.user_id;
       if (value) {
         data.user_id = value;
         // 检查必填项

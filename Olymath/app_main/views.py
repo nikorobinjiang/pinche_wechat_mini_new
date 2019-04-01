@@ -16,6 +16,7 @@ from datetime import datetime
 from datetime import date
 from datetime import time
 import pytz
+import logging
 
 # import time
 
@@ -65,15 +66,12 @@ def getTripList(request):
     query = query.order_by("-updated_at")
     tripList = query.values('id', 'departure', 'destination', 'leave_date', 'leave_time', 'seats_count', 'people_count', 
     'pc_type', 'demo', 'price', 'status', 'contact_phone','contact_gender', 'contact_wechat_account', 'contact_gender', 'contact_name',
-    'created_at', 'updated_at', 'user__nickName', 'user__avatarUrl')[offset:offset+countPerPage]
+    'created_at', 'updated_at', 'user__nickName', 'user__avatarUrl','vehicle')[offset:offset+countPerPage]
     
     # 将搜索内容保存到数据库 TODO 先放入缓存队列
     if(search_departure and search_destination and request.GET.get('user_id')):
-        obj = HotTripSearch()
-        obj.user_id = request.GET.get('user_id')
-        obj.departure = search_departure
-        obj.destination = search_destination
-        obj.save()    
+        HotTripSearch.objects.filter(user_id=request.GET.get('user_id')).filter(departure=search_departure).filter(destination = search_destination).delete()
+        HotTripSearch.objects.get_or_create(user_id=request.GET.get('user_id'),departure=search_departure,destination = search_destination)
 
     # tripList = serializers.serialize("json",tripList)
     tripList = list(tripList)
@@ -106,12 +104,13 @@ def myTripList(request):
     query = query.order_by("-updated_at")
     tripList = query.values('id', 'departure', 'destination', 'leave_date', 'leave_time', 'seats_count', 'people_count', 
     'pc_type', 'demo', 'price', 'status', 'contact_phone','contact_gender', 'contact_wechat_account', 'contact_gender', 'contact_name',
-    'created_at', 'updated_at', 'user__nickName', 'user__avatarUrl')[offset:offset+countPerPage]
+    'created_at', 'updated_at', 'user__nickName', 'user__avatarUrl','vehicle')[offset:offset+countPerPage]
     tripList = list(tripList)
     
     return HttpResponse(json.dumps(tripList,default = myconverter))
 
 def createOrUpdateTrip(request):
+
     tripId = request.POST.get('tripId')
     if tripId:
         try:
@@ -167,7 +166,7 @@ def tripDetail(request):
     try:
         obj = TripInfo.objects.values('id', 'departure', 'destination', 'leave_date', 'leave_time', 'seats_count', 'people_count', 
         'pc_type', 'demo', 'price', 'status', 'contact_phone','contact_gender', 'contact_wechat_account', 'contact_gender', 'contact_name',
-        'created_at', 'updated_at', 'user__nickName', 'user__avatarUrl','isAgree').get(id=tripId)
+        'created_at', 'updated_at', 'user__nickName', 'user__avatarUrl','isAgree','vehicle').get(id=tripId)
     except TripInfo.DoesNotExist:
         return JsonResponse({'message':'该行程不存在','info':'error'})
     # return JsonResponse(json.dumps(obj,default = myconverter),safe=False)
