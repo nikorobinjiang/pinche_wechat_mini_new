@@ -64,8 +64,8 @@
   white-space: nowrap;
 }
 .collapse-icon{
-  width: 50rpx;
-  height: 50rpx;
+  width: 35rpx;
+  height: 35rpx;
   
 }
 .extra-text{

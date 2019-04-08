@@ -138,8 +138,12 @@
             <view>车型: {{ item.vehicle }}</view>
           </view>
           <view class='textcenter mgt10'>
-            <image wx:if="{{!item.collapse}}" src='../../resources/img/up.png' class='collapse-icon' data-type="{{item.id}}" bindtap='showless'></image>
-            <image wx:if="{{item.collapse}}" src='../../resources/img/down.png' class='collapse-icon' data-type="{{item.id}}" bindtap='showmore'></image>
+            <view wx:if="{{!item.collapse}}">
+              <image src='../../resources/img/Up-3-2.png' class='collapse-icon' data-type="{{item.id}}" bindtap='showless'></image>
+            </view>
+            <view wx:if="{{item.collapse}}">
+              <image src='../../resources/img/Down-3-2.png' class='collapse-icon' data-type="{{item.id}}" bindtap='showmore'></image>
+            </view>
           </view>
         </view>
         

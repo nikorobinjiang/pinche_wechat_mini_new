@@ -14,7 +14,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "拼车吧",
+    "navigationBarTitleText": "简易拼车",
     "navigationBarTextStyle": "black",
     "backgroundColor": "#f9f9f9",
     "enablePullDownRefresh": true
